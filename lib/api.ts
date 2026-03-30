@@ -12,6 +12,7 @@ const instance = axios.create({
   },
 });
 
+
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
@@ -49,7 +50,17 @@ export const deleteNote = async (id: string): Promise<Note> => {
   return data;
 };
 
+// export const fetchNoteById = async (id: string): Promise<Note> => {
+//   const { data } = await instance.get(`/notes/${id}`);
+//   return data;
+// };
+
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const { data } = await instance.get(`/notes/${id}`);
-  return data;
+  const res = await axios.get<Note>(`${BASE_URL}/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data;
 };
