@@ -11,10 +11,10 @@ export default async function NotesPage() {
     queryFn: () => fetchNotes(1, ""),
   });
 
+    
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NotesClient />
     </HydrationBoundary>
   );
 }
-console.log(token)
